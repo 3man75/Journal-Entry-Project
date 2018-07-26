@@ -1,24 +1,13 @@
 import sqlite3
 from Main import to_day, Journal_Entry
 
-conn = sqlite3.connect('Story_Journals.db')
+DB = sqlite3.connect("Journals.sqlite")
+iterator = DB.cursor()
 
-cursor = conn.cursor()
+iterator.execute("create table Journals (Journal_Entry, to_day)")
+iterator.execute("Insert into Journals values ('Good', 7/26/2018)")
 
-def create_table():
-    cursor.execute('THis will be a table. (datestamp TEXT, )')
+print("Database")
 
-def data_entry():
-    cursor.execute("""INSERT DATA FOR JOURNALS:""")
-    conn.commit()
-    conn.close()
-    print(to_day,Journal_Entry)
-
-
-conn.close()
-conn.commit()
-
-
-
-#create_table()
-#data_entry()
+for Journal_Entry in iterator.fetchall():
+        print(Journal_Entry)
